@@ -57,3 +57,13 @@
     border: none;
     background: none;
   }
+
+  .grid-container {
+    display: grid;
+  }
+
+  .flex-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

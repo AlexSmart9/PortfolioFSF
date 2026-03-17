@@ -1,7 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import './styles/login.css'
 
 export const Login = () => {
+
+    const navigate = useNavigate();
 
     // Capture what user writes
     const [email, setEmail] = useState('');
@@ -12,7 +16,7 @@ export const Login = () => {
 
     // Function to handle inputs
     const handleSubmit = async (e:React.SubmitEvent) => {
-        const url = '';
+        const API_BASE_URL = 'https://portfoliofs-production.up.railway.app/api';
         e.preventDefault();
         setError('');
 
@@ -26,17 +30,16 @@ export const Login = () => {
         setLoading(true);
 
         try{
-            const response = await axios.post('https://portfoliofs-production.up.railway.app/api/login', {
+            const response = await axios.post(`${API_BASE_URL}/login`, {
                 email:email,
                 password:password
             });
-            
-            console.log('Server response', response.data);
 
             const token = response.data.token;
 
             localStorage.setItem('token', token);
 
+            navigate('/admin')
         } catch (err:any) {
             console.error('Request Error', err);
 
@@ -51,14 +54,14 @@ export const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <form onSubmit={handleSubmit} className="login-form">
-                <h2>Iniciar Sesion</h2>
-                {error && <p className="error-message" style={{color: 'red'}}>{error}</p>}
+        <div className="login__container flex-container">
+            <form onSubmit={handleSubmit} className="login__form">
+                <h2 className="login__title">Iniciar Sesion</h2>
+                {error && <p className="error__message" style={{color: 'red'}}>{error}</p>}
             
-                <div className="form-group">
-                    <label htmlFor="email">Correo Electronico</label>
-                    <input 
+                <div className="form__group flex-container">
+                    <label className="form__group-label" htmlFor="email">Correo Electronico</label>
+                    <input className="form__group-input" 
                     type="email"
                     id="email"
                     value={email}
@@ -68,9 +71,9 @@ export const Login = () => {
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="password">Contraseña</label>
-                    <input
+                <div className="form__group flex-container">
+                    <label className="form__group-label" htmlFor="password">Contraseña</label>
+                    <input className="form__group-input"
                     type="password"
                     id="password"
                     value={password}
@@ -79,7 +82,11 @@ export const Login = () => {
                     />
                 </div>
             
-                <button type="submit">{loading ? 'Connecting to Railway...' : 'Ingresar'}</button>
+                <div className="form__buttons-container flex-container">
+                <button className="form__button" type="submit">
+                    {loading ? 'Connecting to Railway...' : 'Ingresar'}    
+                </button>
+                </div>
             </form>
         </div>
     );
