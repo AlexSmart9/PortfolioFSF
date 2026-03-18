@@ -1,3 +1,7 @@
+import './styles/admin.css'
+
+
+
 export const Admin = () => {
 
     const handleLogout = () => {
@@ -5,25 +9,21 @@ export const Admin = () => {
     }
 
     return (
-        <div className="admin__panel-container">
-            <h1 className="admin__panel-title">Panel de control</h1>
+        <div className="admin__panel-container grid-container">
+          <div className="admin__navbar-container">
+            <h1 className="admin__title">MAE Tech Admin</h1>
+            <div className="admin__list-container">
+              <ul className="admin__list">
+                <li className="admin__list-item">Posts</li>
+                <li className="admin__list-item">Projects</li>
+                <li className="admin__list-item">Certifications</li>
+                <li className="admin__list-item">Skills</li>
+              </ul>
+            </div>
+          </div>
+          <div className="admin__content-container">
+          </div>
 
-            <button className="admin__panel-button"
-                onClick={handleLogout}
-        style={{
-          marginTop: '2rem',
-          padding: '10px 20px',
-          backgroundColor: '#ff4757',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          fontWeight: 'bold'
-        }}
-      >
-        Cerrar Sesión 🚪
-      </button>
-            
         </div>
     );
 

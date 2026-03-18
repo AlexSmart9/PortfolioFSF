@@ -22,7 +22,7 @@ export const Login = () => {
 
         if (!email || !password) {
             
-            setError('Por favor, completa todos los campos 🕵️‍♂️');
+            setError('Please complete all field 🕵️‍♂️');
             return;
 
         }
@@ -56,11 +56,11 @@ export const Login = () => {
     return (
         <div className="login__container flex-container">
             <form onSubmit={handleSubmit} className="login__form">
-                <h2 className="login__title">Iniciar Sesion</h2>
+                <h2 className="login__title">Sign In</h2>
                 {error && <p className="error__message" style={{color: 'red'}}>{error}</p>}
             
                 <div className="form__group flex-container">
-                    <label className="form__group-label" htmlFor="email">Correo Electronico</label>
+                    <label className="form__group-label" htmlFor="email">Email</label>
                     <input className="form__group-input" 
                     type="email"
                     id="email"
@@ -72,7 +72,7 @@ export const Login = () => {
                 </div>
 
                 <div className="form__group flex-container">
-                    <label className="form__group-label" htmlFor="password">Contraseña</label>
+                    <label className="form__group-label" htmlFor="password">Password</label>
                     <input className="form__group-input"
                     type="password"
                     id="password"
@@ -84,7 +84,7 @@ export const Login = () => {
             
                 <div className="form__buttons-container flex-container">
                 <button className="form__button" type="submit">
-                    {loading ? 'Connecting to Railway...' : 'Ingresar'}    
+                    {loading ? 'Connecting to Railway...' : 'Get In'}    
                 </button>
                 </div>
             </form>
