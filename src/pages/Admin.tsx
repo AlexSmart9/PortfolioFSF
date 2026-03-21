@@ -1,3 +1,4 @@
+import { Posts } from '../components/Post';
 import './styles/admin.css'
 
 
@@ -22,6 +23,7 @@ export const Admin = () => {
             </div>
           </div>
           <div className="admin__content-container">
+            <Posts/>
           </div>
 
         </div>

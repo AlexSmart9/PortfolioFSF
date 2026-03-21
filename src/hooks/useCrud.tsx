@@ -18,6 +18,7 @@ export const useCrud = <T,>( baseUrl:string ) => {
 
             const response = await axios.get(`${baseUrl}${endpoint}`);
             setData(response.data);
+            return response.data;
 
         } catch (err) {
         
