@@ -67,3 +67,28 @@
     justify-content: center;
     align-items: center;
   }
+
+  .admin-subtitle{
+    font-size: 34px;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    text-align: center;
+    background: linear-gradient(
+      184deg,
+      #000000,
+      #000000,
+      #000000,
+      #ffffff,
+      #e2e613,
+      #e2e613,
+      #e2e613,
+      #e2e613
+
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }

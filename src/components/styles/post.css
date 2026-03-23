@@ -7,15 +7,6 @@
 }
 
 
-.post__title {
-    color: #1cdfe6;
-    font-size: 34px;
-    font-weight: 900;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;    
-}
 
 .post__content{
     width: 100%;

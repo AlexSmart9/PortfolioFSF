@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import type {ChangeEvent} from 'react';
 import { BiEdit, BiTrash, BiPlus } from "react-icons/bi";
 import { useCrud } from "../hooks/useCrud";
-import './post.css'
+import './styles/post.css'
 
 
 // Define the structure of a post.
@@ -21,7 +21,6 @@ export const Posts = () => {
     // Initialize CRUD hook
 
     const {
-        data: posts,
         loading,
         getAll,
         create,
@@ -131,7 +130,7 @@ export const Posts = () => {
     return (
 
         <section className="post__section">
-            <h2 className="post__title">Posts</h2>
+            <h2 className="post__title admin-subtitle">Posts</h2>
             <div className="post__content flex-container">
                 {
                 loading ? (
