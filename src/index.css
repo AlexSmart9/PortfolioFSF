@@ -92,3 +92,39 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  .btn__admin-create {
+    background-color: #000000;
+      position: fixed;
+      padding: 4px;
+      top: 30px;
+      right: 30px;
+      width: 130px;
+      height: 45px;
+      border-radius: 5px;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: all 3s ease-in-out;
+      background-color: #fff;
+    }
+  
+  .btn__admin-create span {
+    font-size: 18px;
+    font-weight: 700;
+    background:linear-gradient(
+      135deg,
+      #88ff09,
+      #fd0f2f,
+      #0dffa2,
+      #ee7e07,
+      #0478ed
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  
+  .btn__admin-create:hover {
+    transform: scale(1.1);
+  }

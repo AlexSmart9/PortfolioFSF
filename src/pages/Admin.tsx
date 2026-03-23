@@ -20,7 +20,7 @@ export const Admin = () => {
             <div className="admin__list-container">
               <ul className="admin__list">
                 <li className="admin__list-item">
-                  <NavLink to={'/admin/posts'} className={({ isActive }) => isActive ? 'admin__list-item-active' : undefined}>Posts</NavLink>
+                  <NavLink to={'/admin/posts'} className={({ isActive }) => isActive ? 'admin__list-item-active' : undefined}>Blog</NavLink>
                 </li>
                 <li className="admin__list-item">
                   <NavLink to={'/admin/projects'} className={({ isActive }) => isActive ? 'admin__list-item-active' : undefined}>Projects</NavLink>

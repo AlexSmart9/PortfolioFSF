@@ -130,7 +130,7 @@ export const Posts = () => {
     return (
 
         <section className="post__section">
-            <h2 className="post__title admin-subtitle">Posts</h2>
+            <h2 className="post__title admin-subtitle">Blog</h2>
             <div className="post__content flex-container">
                 {
                 loading ? (
