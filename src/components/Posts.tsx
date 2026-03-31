@@ -56,13 +56,9 @@ export const Posts = () => {
         setFormData((prev : any) => ({...prev, [name]: value}));
     };
 
-    // Manejador especial para el input de tipo archivo (Imagen)
+    // Special handler for input file type (Image)
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // 1. Validamos que existan archivos ANTES de hacer nada
         if (e.target.files && e.target.files.length > 0) {
-            
-            // 2. Le decimos a TypeScript que prev es de tipo 'any' (ya que cambiaste tu useState a <any>)
-            // Y usamos e.target.files! (con exclamación) porque el if de arriba ya garantiza que no es null
             setFormData((prev: any) => ({ ...prev, image: e.target.files![0] }));
         }
     };
@@ -161,7 +157,6 @@ export const Posts = () => {
                     <BiPlus/> <span>New Post</span>
                 </button>
             </div>
-                {/* 🪟 EL MODAL DE CREACIÓN/EDICIÓN */}
             {isFormOpen && (
                 <div className="modal__overlay">
                     <div className="modal__content">

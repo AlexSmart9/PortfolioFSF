@@ -1,8 +1,8 @@
 .admin__panel-container{
-    background-image: url('bgap.png');
+    /* background-image: url('bgap.png');
     background-size: cover;
-    background-position: center;
-    background-color: #121212;
+    background-position: center; */
+    background-color: #282626;
     width: 100%;
     min-height: 100dvh;
     grid-template-columns: 1fr 6fr;
