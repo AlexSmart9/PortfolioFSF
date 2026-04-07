@@ -1,9 +1,9 @@
 import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
-import { Posts } from '../components/Posts';
-import { Projects } from '../components/Projects';
+import { Posts } from '../components/Posts/Posts';
+import { Projects } from '../components/Projects/Projects';
 import './styles/admin.css'
-import { Certifications } from '../components/Certifications';
-import { Skills } from '../components/Skills';
+import { Certifications } from '../components/Certifications/Certifications';
+import { Skills } from '../components/Skills/Skills';
 
 
 

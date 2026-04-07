@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import type {ChangeEvent} from 'react';
 import { BiEdit, BiTrash, BiPlus } from "react-icons/bi";
-import { useCrud } from "../hooks/useCrud";
+import { useCrud } from "../../hooks/useCrud";
 import './styles/post.css'
 
 

@@ -1,4 +1,4 @@
-import { useCrud } from "../hooks/useCrud"
+import { useCrud } from "../../hooks/useCrud"
 import React, { useState, useEffect } from "react"
 import { BiEdit, BiTrash, BiPlus } from "react-icons/bi"
 import type {ChangeEvent} from 'react';
