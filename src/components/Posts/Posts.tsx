@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import type {ChangeEvent} from 'react';
 import { BiEdit, BiTrash, BiPlus } from "react-icons/bi";
 import { useCrud } from "../../hooks/useCrud";
-import './styles/post.css'
+import './post.css'
 
 
 // Define the structure of a post.
@@ -40,7 +40,6 @@ export const Posts = () => {
             const getData = async () => {
                 const response = await getAll(endpoint);
                 setData(response);
-                console.log(`Data fetched successfully:`, data );
             };
             getData();
     

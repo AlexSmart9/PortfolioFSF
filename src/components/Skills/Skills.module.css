@@ -1,0 +1,24 @@
+.section {
+    width: 100%;
+    height: 100dvh;
+    padding: 20px;    
+}
+
+.header{
+    height: 70px;
+    width:100%;
+}
+
+.subtitle {
+    font-size: 34px;
+    color: #fff;
+}
+
+.container {
+    width: 100%;
+    height: 100dvh;
+    padding: 10px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 30px;
+    align-content: start;
+}

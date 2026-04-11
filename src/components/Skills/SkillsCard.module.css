@@ -1,0 +1,35 @@
+.card__container {
+    width: 130px;
+    height: 160px;
+    gap: 10px;
+    flex-direction: column;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.card__content h3 {
+    color: #ffff;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.card__content p {
+    color: #ffff;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.actions {
+    width: 100%;
+    height: 40px;
+}
+
+.editBtn {
+    color: rgb(0, 255, 123);
+}
+
+.deleteBtn {
+    color: #ff0404;
+
+}

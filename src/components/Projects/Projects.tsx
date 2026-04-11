@@ -2,7 +2,8 @@ import { useCrud } from "../../hooks/useCrud"
 import React, { useState, useEffect } from "react"
 import { BiEdit, BiTrash, BiPlus } from "react-icons/bi"
 import type {ChangeEvent} from 'react';
-import './styles/projects.css'
+import './projects.css'
+
 export interface Project {
     id?: string | number
     title: string

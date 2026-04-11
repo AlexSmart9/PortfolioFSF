@@ -1,0 +1,72 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    min-width: 500px;
+    background-color: rgba(0,0,0,0.822);
+}
+
+.content {
+    flex-direction: column;
+    gap: 30px;
+    background-color: #222;
+    color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    width: 80%;
+    max-width: 500px;
+    max-height: 85dvh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+}
+
+.header {
+    width: 100%;   
+    justify-content: space-between;
+    border-bottom: 1px solid #444;
+    padding-bottom: 12px;
+}
+
+.header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+    padding: 0 4px;
+    
+}
+
+.closeBtn:hover {
+    color: #ff4d4d;
+}
+
+.body {
+   width: 100%;
+}
+
+.content::-webkit-scrollbar{
+    width: 8px;
+}
+
+.content::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb{
+    background: #555;
+    border-radius: 4px;
+}
+.content::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}

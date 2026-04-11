@@ -1,3 +1,5 @@
+import styles from './Modal.module.css'
+
 import type { ReactNode } from "react";
 
 interface ModalProps {
@@ -12,13 +14,13 @@ export const Modal = ({ isOpen, onClose, title, children} : ModalProps) => {
     if(!isOpen) return null;
 
     return (
-        <div>
-            <div>
-                <header>
+        <div className={`${styles.overlay} flex-container`}>
+            <div className={`${styles.content} flex-container`}>
+                <header className={`${styles.header} flex-container`}>
                     <h2>{title}</h2>
-                    <button onClick={onClose}>X</button>
+                    <button className={styles.closeBtn} onClick={onClose}>X</button>
                 </header>
-                <div>
+                <div className={`${styles.body} flex-container`}>
                     {children}
                 </div>
             </div>
