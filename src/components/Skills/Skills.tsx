@@ -34,19 +34,19 @@ export const Skills = () => {
     } = useCrud(API_BASE_URL);
 
 
-    useEffect(() => {
-            getData();
-        
-    }, []);
-
+    
     const getData = async () => {
         try {
-            const data = await getAll(endpoint);
-            setData(data || []);
+            const response = await getAll(endpoint);
+            setData(response || []);
         } catch (error) {
             console.error('Error fetching skills:', error);
         }
     };
+    
+    useEffect(() => {
+            getData();
+    }, []);
 
     const handleOpenCreate = () => {
         setSelectedSkill(null);
@@ -107,10 +107,10 @@ export const Skills = () => {
                     ) : (
                         data.map((skill) => (
                             <SkillCard
-                            key={skill.id}
-                            skill={skill}
-                            onEdit={() => handleOpenEdit(skill)}
-                            onDelete={() => handleDelete(skill.id)}
+                                key={skill.id}
+                                skill={skill}
+                                onEdit={() => handleOpenEdit(skill)}
+                                onDelete={() => handleDelete(skill.id)}
                             />
                         ))
                     )

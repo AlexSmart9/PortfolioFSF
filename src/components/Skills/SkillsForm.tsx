@@ -25,7 +25,6 @@ export const SkillsForm = ({onCancel, onSubmit, initialData} : SkillFormProps) =
     const handleSumbit = (e : React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSubmit(formData);
-        console.log(formData);
     };
 
     return (
@@ -64,12 +63,7 @@ export const SkillsForm = ({onCancel, onSubmit, initialData} : SkillFormProps) =
                     required
                 >
                     <option value="" disabled>Select a category...</option>
-                    <option value='Frontend'>Frontend</option>
-                    <option value='Backend'>Backend</option>
-                    <option value='Database'>Database</option>
-                    <option value='Machine Learning'>Machine Learning</option>'
-                    <option value='Artificial Intelligence'>Artificial Intelligence</option>
-                    <option value='Cloud Computing'>Cloud Computing</option>
+                    <option value='Technical Skill'>Technical Skill</option>
                     <option value='Soft Skill'>Soft Skill</option>
                 </select>
             </div>
