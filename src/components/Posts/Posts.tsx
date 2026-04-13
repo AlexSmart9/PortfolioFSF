@@ -1,20 +1,27 @@
-import React, { useState, useEffect} from "react";
-import type {ChangeEvent} from 'react';
-import { BiEdit, BiTrash, BiPlus } from "react-icons/bi";
+import { useState, useEffect} from "react";
 import { useCrud } from "../../hooks/useCrud";
-import './post.css'
-
+import style from './Posts.module.css';
+import { AdminButton } from "../common/AdminButton/AdminButton";
+import { Modal } from "../common/Modal/Modal";
+import { PostsForm, type PostsFormData } from "./PostsForm";
+import { PostsCard } from "./PostsCard";
 
 // Define the structure of a post.
 
 export interface Post {
-    id?: string | number;
+    id: string | number;
     title: string;
     content: string;
     image_url?: string;
 }
 
 export const Posts = () => {
+    
+    const [data, setData] = useState<Post[]>([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+
+    const endpoint = 'posts'
 
     const API_BASE_URL = 'https://portfoliofs-production.up.railway.app/api/';
 
@@ -28,91 +35,65 @@ export const Posts = () => {
         destroy,
     } = useCrud(API_BASE_URL);
 
-    const endpoint = 'posts'
-    const [isFormOpen, setIsFormOpen]  = useState<boolean>(false);
-    const [editingId, setEditingId] = useState<string | number | null>(null);
-    const [formData, setFormData] = useState<any>({title: '',content: '', image_url: null});
-    const [data, setData] = useState<Post[]>([]);
-
-    useEffect(() => {
-        
+    const getData = async () => {
         try {
-            const getData = async () => {
-                const response = await getAll(endpoint);
-                setData(response);
-            };
-            getData();
-    
+            const response = await getAll(endpoint);
+            setData(response || [])
         } catch (error) {
-            console.error(error, 'Error fetching data');
+            console.error('Error fetching posts:', error);
         }
-        
+    };
+
+    useEffect(() => {   
+        getData()
     }, []);
 
-    // Handle changes in the input fields
-    const handleChange = (e : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const {name, value} = e.target;
-        setFormData((prev : any) => ({...prev, [name]: value}));
-    };
-
-    // Special handler for input file type (Image)
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setFormData((prev: any) => ({ ...prev, image: e.target.files![0] }));
-        }
-    };
 
     // Open form to create a new post
     const handleOpenCreate = () => {
-        setFormData({title: '', content: '', image_url: ''})
-        setEditingId(null);
-        setIsFormOpen(true);
-    }
+        setSelectedPost(null);
+        setModalIsOpen(true);
+    };
 
     //Open form to edit an existing post
     const handleOpenEdit = (post: Post) => {
-        setFormData({title: post.title, content: post.content, image_url: ''})
-        setEditingId(post.id as string | number);// Set the current ID 
-        setIsFormOpen(true);
-
+        setSelectedPost(post);
+        setModalIsOpen(true);
     };
 
-    // Handle Form Submit (handles both create and update)
-    const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
+    const handleCloseModal = () => {
+        setSelectedPost(null);
+        setModalIsOpen(false);
+    };
 
+
+    const handleSubmit = async (formData : PostsFormData) => {
+
+        try {
             const dataToSend = new FormData();
 
             dataToSend.append('title', formData.title);
             dataToSend.append('content', formData.content);
 
-            if(formData.image) {
-                dataToSend.append('image', formData.image);
+            if (formData.image) {
+                dataToSend.append('image', formData.image)
             }
 
-
-            if(editingId) {
-                // Update the Id already exists in state
-                await update(endpoint, editingId, dataToSend)
-
+            if (selectedPost && selectedPost.id) {
+                await update(endpoint, selectedPost.id, dataToSend);
             } else {
-                // Create a new post
-                const newPost = await create(endpoint, dataToSend)
-                setData(prevData => [...prevData, newPost]);
+                await create(endpoint, dataToSend);
             }
 
-            const refreshData = await getAll(endpoint);
-            setData(refreshData);
-            setIsFormOpen(false);
-            setFormData({ title: '', content: '', image: null });
-            setEditingId(null);
+            await getData();
+            handleCloseModal();
 
 
-        } catch (err) {
-            console.error(err, 'Error creating post');
+        } catch (error) {
+            console.error('Error saving post:', error)
         }
-    };
+
+    }
 
     // Handle DELETE operation
     const handleDelete = async (id : string | number) => {
@@ -123,93 +104,44 @@ export const Posts = () => {
     };
 
     return (
-
-        <section className="post__section">
-            <h2 className="post__title admin-subtitle">Blog</h2>
-            <div className="post__content flex-container">
+        <section className={style.section}>
+            <header className={`${style.header} flex-container`}>
+                <h2>Blog</h2>
+                <AdminButton
+                    tooltipText="Add new Post"
+                    onClick={handleOpenCreate}
+                />
+            </header>
+            <div className={`${style.container} flex-container`}>
                 {
-                loading ? (
-                    <p>Loading...</p>
-                ) : data.map((item) => (
-                    <div key={item.id} className="post__card"> 
-                        <div className="post__card-header flex-container">
-                            <h3 className="post__card-title">{item.title}</h3>
-                            <div className="post__card-actions flex-container">
-                                <button className="post__card-edit" onClick={() => handleOpenEdit(item)} title="Edit Post">
-                                    <BiEdit/>
-                                </button>
-                                <button className="post__card-delete" onClick={() => item.id && handleDelete(item.id)} title="Delete Post">
-                                    <BiTrash/>
-                                </button>
-                            </div>
-
-                        </div>
-                        <p className="post__card-content">{item.content}</p>
-                        {
-                            item.image_url && (<img className="post__card-image" src={item.image_url} alt={item.title} />)
-                        }
-                        </div>
-                    ))
+                    loading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        data.map((post) => (
+                            <PostsCard
+                                key={post.id}
+                                post={post}
+                                onEdit={() => handleOpenEdit(post)}
+                                onDelete={() => handleDelete(post.id)}
+                            />
+                        )
+                        )
+                    )
                 }
-
-                <button className="post__create-button flex-container" onClick={handleOpenCreate} title="Create Post">
-                    <BiPlus/> <span>New Post</span>
-                </button>
             </div>
-            {isFormOpen && (
-                <div className="modal__overlay">
-                    <div className="modal__content">
-                        <h3 className="modal__title">{editingId ? 'Edit Post' : 'Create New Post'}</h3>
-                        
-                        <form onSubmit={handleSubmit} className="modal__form">
-                            <div className="form__group">
-                                <label>Títle</label>
-                                <input 
-                                    type="text" 
-                                    name="title" 
-                                    value={formData.title} 
-                                    onChange={handleChange} 
-                                    placeholder="Ej: High performance computation HPC" 
-                                    required 
-                                />
-                            </div>
-                            <div className="form__group">
-                                <label>Content</label>
-                                <textarea 
-                                    name="content" 
-                                    value={formData.content} 
-                                    onChange={handleChange} 
-                                    placeholder="What are you thinking about" 
-                                    rows={5}
-                                    required 
-                                />
-                            </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onClose={handleCloseModal}
+                title={selectedPost ? 'Update Post' : 'New Post'}
 
-                            <div className="form__group">
-                                <label> + Add image</label>
-                                <input 
-                                    type="file" 
-                                    name="image" 
-                                    accept="image/*"
-                                    onChange={handleFileChange} 
-                                />
-                            </div>
-
-                            <div className="modal__actions">
-                                <button type="button" className="btn-cancel" onClick={() => setIsFormOpen(false)}>
-                                    Cancel
-                                </button>
-                                <button type="submit" className="btn-submit">
-                                    {editingId ? 'Update' : 'Publish'}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
-
+            >
+                <PostsForm
+                    onSubmit={handleSubmit}
+                    onCancel={handleCloseModal}
+                    initialData={selectedPost || undefined}
+                />
+            </Modal>
         </section>
-        
     )
 
 }

@@ -1,0 +1,50 @@
+.card {
+    width: 100%;
+    height: auto;
+    color: #fff;
+    padding: 24px;
+    transition: all 2s ease-in-out;
+}
+
+.card:hover {
+    .actions {
+        opacity: 1;
+    }
+}
+
+.header {
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+}
+
+.header h3 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.actions {
+    width: 100px;
+    height: 100%;
+    opacity: 0;
+}
+
+.editBtn {
+    color: #00ff15;
+} 
+
+.deleteBtn {
+    color: #ff0000;
+}
+
+.content {
+    font-size: 18px;
+}
+.image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover; 
+    border-radius: 8px; 
+    margin-top: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}

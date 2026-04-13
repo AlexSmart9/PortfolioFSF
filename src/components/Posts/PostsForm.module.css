@@ -1,0 +1,66 @@
+.form {
+    width: 80%;
+    height: 90%;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formGroup {
+    flex-direction: column;
+    gap:5px;
+    justify-content: start;
+    align-items: start;
+    width: 80%;
+}
+
+.formGroup input[type='text'] {
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    background-color: #313030;
+    color: #fff;
+}
+
+.formGroup select {
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    background-color: #323030;
+    color: #fff;
+}
+
+.formGroup input:focus{
+    border-color: #2aff04;
+} 
+.formGroup select:focus {
+    border-color: #2aff04;
+}
+.formActions {
+    padding: 5px;
+    height: 40px;
+    width: 100%;
+    gap: 10px;
+    justify-content: end;
+}
+
+.formActions button {
+    width: 60px;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.btnCancel {
+    background-color: #d00808;
+    color: #fff;
+}
+
+.btnSubmit {
+    background-color: #04eeffca;
+    color: #000;
+}
+
+.formActions button:hover {
+    transform: scaleX(1.05);
+    border: 1px solid #fff;
+}
