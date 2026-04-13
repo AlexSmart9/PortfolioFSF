@@ -98,12 +98,10 @@ export const Certifications = () => {
     }
     
     const handleDelete = async (id: string | number) => {
-        if (window.confirm('Are you sure you want to delete this certification?'))
-        try {
+        if (window.confirm('Are you sure you want to delete this certification?')) {
+            
             await destroy(endpoint, id);
-            await getData();
-        } catch (error) {
-            console.error('Error deleting certification', error);
+            setData(prevData => prevData.filter(item => item.id !== id));
         }
     };
 

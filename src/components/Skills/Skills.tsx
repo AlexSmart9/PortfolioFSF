@@ -81,13 +81,8 @@ export const Skills = () => {
 
     const handleDelete = async (id: string | number) => {
         if (window.confirm('Are you sure you want to delete this skill?')) {
-            try {
-                await destroy(endpoint, id);
-                await getData();
-            } catch (error) {
-                console.error('Error deleting skill', error);
-    
-            }
+            await destroy(endpoint, id);
+            setData(prevData => prevData.filter(item => item.id !== id));
         };
     }
 
