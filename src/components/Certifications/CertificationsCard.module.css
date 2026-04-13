@@ -5,7 +5,7 @@
     gap: 10px;
     justify-content: start;
     align-items: flex-start;
-    background-color: #000;
+    background-color: #181818;
     padding: 10px;
     border-radius: 10px;
 }
@@ -44,7 +44,7 @@
 }
 
 .editBtn {
-    color: #04ff00;
+    color: #00b0bd;
 
 }
 

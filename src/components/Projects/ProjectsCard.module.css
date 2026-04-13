@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: start;
     padding: 10px;
-    background-color: #000;
+    background-color: #181818;
     border-radius: 10px;
 }
 
@@ -51,7 +51,7 @@
 .editBtn {
     width: 40%;
     height: 40px;
-    color: #00e5ed;
+    color: #00b0bd;
     font-size: 30px;
     text-align: center;
     
