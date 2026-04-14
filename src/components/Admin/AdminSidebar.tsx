@@ -9,18 +9,23 @@ import {
     BiStar 
 } from 'react-icons/bi';
 import styles from './AdminSidebar.module.css';
+import { ConfirmDialog } from '../common/Modal/ConfirmDialog';
 
 export const AdminSidebar = () => {
-    // Estado para controlar si el menú está abierto o cerrado
+    
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
     const [isOpen, setIsOpen] = useState(true);
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        if (window.confirm('Are you sure you want to log out?')) {
             localStorage.removeItem('token');
             navigate('/login');
-        }
     };
+
+    const handleLogoutClick = () => {
+        setIsLogoutModalOpen(true);
+    }
 
     const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -29,6 +34,7 @@ export const AdminSidebar = () => {
     };
 
     return (
+        <>
         <aside className={`${styles.navbarContainer} ${isOpen ? styles.open : styles.closed}`}>
             <div className={`${styles.topSection} flex-container`}>
                 <button onClick={toggleSidebar} className={styles.menuBtn}>
@@ -67,11 +73,21 @@ export const AdminSidebar = () => {
             </nav>
 
             <div className={styles.logoutContainer}>
-                <button onClick={handleLogout} className={styles.logoutBtn}>
+                <button onClick={handleLogoutClick} className={styles.logoutBtn}>
                     <BiLogOut size={24} />
                     <span style={{ display: isOpen ? "block" : "none" }}>Logout</span>
                 </button>
             </div>
         </aside>
+        <ConfirmDialog
+            isOpen={isLogoutModalOpen}
+            onClose={(() => setIsLogoutModalOpen(false))}
+            onConfirm={handleLogout}
+            title={'Logout'}
+            message={'Are you sure you want to logout?'}
+            confirmText={'Yes, Logout'}
+            cancelText={'Cancel'}
+        />
+    </>
     );
 };

@@ -5,6 +5,7 @@ import { SkillsForm, type SkillFormData } from "../Skills/SkillsForm";
 import { SkillCard} from './SkillsCard';
 import styles from "./Skills.module.css";
 import { useEffect, useState } from "react";
+import { ConfirmDialog } from "../common/Modal/ConfirmDialog";
 
 export interface Skill {
     id: string | number;
@@ -18,6 +19,7 @@ export const Skills = () => {
     const [data, setData] = useState<Skill[]>([])
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
+    const [deleteId, setDeleteId] = useState<any | null>(null)
 
     const API_BASE_URL = 'https://portfoliofs-production.up.railway.app/api/';
 
@@ -79,15 +81,24 @@ export const Skills = () => {
         }
     };
 
-    const handleDelete = async (id: string | number) => {
-        if (window.confirm('Are you sure you want to delete this skill?')) {
-            await destroy(endpoint, id);
-            setData(prevData => prevData.filter(item => item.id !== id));
-        };
+    const handleDelete = (id: string | number) => {
+        setDeleteId(id)
+    };
+
+    const confirmDelete = async () => {
+        if (deleteId) {
+            try {
+                await destroy(endpoint, deleteId);
+                setData(prev => prev.filter(item => item.id !== deleteId));
+            } catch (error) {
+                console.error("Error deleting skill:", error);
+            }
+        }
     }
 
     return (
-        <section className={`${styles.section}`}>
+      
+      <section className={`${styles.section}`}>
             <header className={`${styles.header} flex-container`}>
                 <h2 className={styles.subtitle}>Skills</h2>
                 <AdminButton
@@ -123,6 +134,15 @@ export const Skills = () => {
                     initialData={selectedSkill || undefined} 
                 />
             </Modal>
+            <ConfirmDialog 
+                isOpen={!!deleteId}
+                onClose={() => setDeleteId(null)}
+                onConfirm={confirmDelete}
+                title="Delete Skill"
+                message="Are you sure you want to delete this skill? This action cannot be undone."
+                confirmText="Delete"
+            />
         </section>
+        
     )
 }

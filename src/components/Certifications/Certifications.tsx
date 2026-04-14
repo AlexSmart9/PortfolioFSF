@@ -5,6 +5,8 @@ import { AdminButton } from '../common/AdminButton/AdminButton';
 import { Modal } from '../common/Modal/Modal';
 import { CertificationsForm, type CertificationFormData } from './CertificactionsForm';
 import { CertificationsCard } from './CertificationsCard';
+import { ConfirmDialog } from '../common/Modal/ConfirmDialog';
+
 
 export interface Certification {
     id: string | number;
@@ -20,6 +22,7 @@ export const Certifications = () => {
     const [data, setData] = useState<Certification[]>([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedCertification, setSelectedCertification] = useState<Certification | null>(null);
+    const [deleteId, setDeleteId] = useState<any | null>(null);
 
     const API_BASE_URL = 'https://portfoliofs-production.up.railway.app/api/';
 
@@ -97,13 +100,21 @@ export const Certifications = () => {
 
     }
     
-    const handleDelete = async (id: string | number) => {
-        if (window.confirm('Are you sure you want to delete this certification?')) {
-            
-            await destroy(endpoint, id);
-            setData(prevData => prevData.filter(item => item.id !== id));
-        }
+    const handleDelete =  (id: string | number) => {
+            setDeleteId(id);
     };
+
+    const confirmDelete = async () => {
+
+        if(deleteId) {
+            try {
+                await destroy(endpoint, deleteId)
+                setData(prev => prev.filter(item => item.id !== deleteId))
+            } catch (error) {
+                console.error('Error deleting certification:', error)
+            }
+        }
+    }
 
     return (
         <section className={`${styles.section}`}>
@@ -141,6 +152,14 @@ export const Certifications = () => {
                     initialData={selectedCertification || undefined}
                 />
             </Modal>
+            <ConfirmDialog
+                isOpen={!!deleteId}
+                onClose={() => setDeleteId(null)}
+                onConfirm={confirmDelete}
+                title="Delete Certification"
+                message="Are you sure you want to delete this certification? This action cannot be undone."
+                confirmText="Delete"
+            />
         </section>
-    )
-}
+    );
+};

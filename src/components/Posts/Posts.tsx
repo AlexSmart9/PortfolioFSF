@@ -5,6 +5,7 @@ import { AdminButton } from "../common/AdminButton/AdminButton";
 import { Modal } from "../common/Modal/Modal";
 import { PostsForm, type PostsFormData } from "./PostsForm";
 import { PostsCard } from "./PostsCard";
+import { ConfirmDialog } from "../common/Modal/ConfirmDialog";
 
 // Define the structure of a post.
 
@@ -20,6 +21,8 @@ export const Posts = () => {
     const [data, setData] = useState<Post[]>([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+    const [deleteId, setDeleteId] = useState<any | null>(null);
+
 
     const endpoint = 'posts'
 
@@ -96,12 +99,20 @@ export const Posts = () => {
     }
 
     // Handle DELETE operation
-    const handleDelete = async (id : string | number) => {
-        if(window.confirm('Are you sure you want to delete this post?')) {
-            await destroy(endpoint, id);
-            setData(prevData => prevData.filter(item => item.id !== id));
-        }
+    const handleDelete =  (id : string | number) => {
+        setDeleteId(id);
     };
+
+    const confirmDelete = async () => {
+        if (deleteId) {
+            try {
+                await destroy(endpoint, deleteId)
+                setData(prev => prev.filter(item => item.id !== deleteId))
+            } catch (error) {
+                
+            }
+        }
+    }
 
     return (
         <section className={style.section}>
@@ -141,6 +152,14 @@ export const Posts = () => {
                     initialData={selectedPost || undefined}
                 />
             </Modal>
+            <ConfirmDialog
+                isOpen={!!deleteId}
+                onClose={() => setDeleteId(null)}
+                onConfirm={confirmDelete}
+                title="Delete Post"
+                message="Are you sure you want to delete this post? This action cannot be undone."
+                confirmText="Delete"
+            />
         </section>
     )
 

@@ -25,5 +25,5 @@ export const Modal = ({ isOpen, onClose, title, children} : ModalProps) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
