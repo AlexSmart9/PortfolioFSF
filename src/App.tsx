@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Routes,Navigate, Route } from 'react-router-dom';
 import {Login} from './pages/Login';
-import {Admin} from './pages/Admin';
+import {Admin} from './pages/Admin/Admin';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 
