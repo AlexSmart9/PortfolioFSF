@@ -25,17 +25,17 @@ export const ProjectsCard = ({ project, onEdit, onDelete }: ProjectCardProps) =>
                         className={styles.editBtn}
                         onClick={onEdit} 
                         title="Edit Project"
-                        aria-label={`Editar proyecto ${project.title}`}
+                        aria-label={`Update project ${project.title}`}
                     >
-                        <BiEdit />
+                        <BiEdit size={30}/>
                     </button>
                     <button 
                         className={styles.deleteBtn} 
                         onClick={onDelete} 
                         title="Delete Project"
-                        aria-label={`Eliminar proyecto ${project.title}`}
+                        aria-label={`Delete project ${project.title}`}
                     >
-                        <BiTrash />
+                        <BiTrash size={30}/>
                     </button>
                 </div>
             </div>
