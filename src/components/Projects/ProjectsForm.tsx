@@ -103,14 +103,14 @@ export const ProjectsForm = ({ onSubmit, onCancel, initialData }: ProjectFormPro
             <div className={`${styles.formActions} flex-container`}>
                 <button 
                     type="button" 
-                    className="btn-cancel" 
+                    className={styles.btnCancel} 
                     onClick={onCancel}
                 >
                     Cancel
                 </button>
                 <button 
                     type="submit" 
-                    className="btn-submit"
+                    className={styles.btnSubmit}
                 >
                     {initialData ? 'Update' : 'Publish'}
                 </button>

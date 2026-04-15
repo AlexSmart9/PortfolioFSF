@@ -43,6 +43,7 @@ export const PostsForm = ({ onSubmit, onCancel, initialData }: PostsFormProps) =
             <div className={`${styles.formGroup} flex-container`}>
                 <label htmlFor="title">Title</label>
                 <input 
+                    id='title'
                     type="text" 
                     name="title" 
                     value={formData.title} 
@@ -55,6 +56,7 @@ export const PostsForm = ({ onSubmit, onCancel, initialData }: PostsFormProps) =
             <div className={`${styles.formGroup} flex-container`}>
                 <label htmlFor="content">Content</label>
                 <textarea 
+                    id='content'
                     name="content" 
                     value={formData.content} 
                     onChange={handleChange} 
@@ -67,19 +69,20 @@ export const PostsForm = ({ onSubmit, onCancel, initialData }: PostsFormProps) =
             <div className={`${styles.formGroup} flex-container`}>
                 <label htmlFor="image"> + Add image</label>
                 <input 
+                    id='image'
                     type="file" 
                     name="image" 
                     accept="image/*"
                     onChange={handleFileChange} 
-                    required={!initialData} // Previene el bug al editar
+                    required={!initialData} 
                 />
             </div>
 
             <div className={`${styles.formActions} flex-container`}>
-                <button type="button" className="btn-cancel" onClick={onCancel}>
+                <button type="button" className={styles.btnCancel} onClick={onCancel}>
                     Cancel
                 </button>
-                <button type="submit" className="btn-submit">
+                <button type="submit" className={styles.btnSubmit}>
                     {initialData ? 'Update' : 'Publish'}
                 </button>
             </div>

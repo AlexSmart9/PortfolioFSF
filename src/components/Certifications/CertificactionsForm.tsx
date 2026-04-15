@@ -83,7 +83,7 @@ export const CertificationsForm = ({onSubmit, onCancel, initialData} : Certifica
                     required
                 />
             </div>
-            <div>
+            <div className={`${styles.formGroup} flex-container`}>
                 <label htmlFor="image">Certification Image</label>
                 <input 
                     type="file"
