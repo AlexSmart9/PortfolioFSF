@@ -83,7 +83,10 @@ export const Posts = () => {
             }
 
             if (selectedPost && selectedPost.id) {
+                
+                dataToSend.append('_method', 'PUT');
                 await update(endpoint, selectedPost.id, dataToSend);
+                
             } else {
                 await create(endpoint, dataToSend);
             }

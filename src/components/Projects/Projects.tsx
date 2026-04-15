@@ -81,6 +81,7 @@ export const Projects = () => {
         }
 
         if (selectedProject && selectedProject.id) {
+            dataToSend.append('_method', 'PUT');
             await update(endpoint, selectedProject.id, dataToSend)
         } else {
             await create(endpoint, dataToSend)

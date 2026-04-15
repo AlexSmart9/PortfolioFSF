@@ -81,7 +81,11 @@ export const useCrud = <T,>( baseUrl:string ) => {
         setError(null);
         try {
             
-            const response = await axios.put(`${baseUrl}${endpoint}/${id}`, payload, {
+            const isFormData = payload instanceof FormData;
+
+            const method = isFormData ? 'post' : 'put';
+
+            const response = await axios[method](`${baseUrl}${endpoint}/${id}`, payload, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -102,7 +106,7 @@ export const useCrud = <T,>( baseUrl:string ) => {
                 window.location.href = '/login'; 
             }
             
-            console.error('Error deleting data', err);
+            console.error('Error updating data', err);
             throw err;
 
         } finally {

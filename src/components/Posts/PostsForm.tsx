@@ -74,7 +74,6 @@ export const PostsForm = ({ onSubmit, onCancel, initialData }: PostsFormProps) =
                     name="image" 
                     accept="image/*"
                     onChange={handleFileChange} 
-                    required={!initialData} 
                 />
             </div>
 

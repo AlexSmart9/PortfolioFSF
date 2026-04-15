@@ -85,6 +85,7 @@ export const Certifications = () => {
             }
 
             if (selectedCertification && selectedCertification.id) {
+                dataToSend.append('_method', 'PUT');
                 await update(endpoint, selectedCertification.id, dataToSend);
             } else {
                 await create(endpoint, dataToSend);
