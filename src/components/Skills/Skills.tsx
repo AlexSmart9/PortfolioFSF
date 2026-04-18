@@ -6,6 +6,9 @@ import { SkillCard} from './SkillsCard';
 import styles from "./Skills.module.css";
 import { useEffect, useState } from "react";
 import { ConfirmDialog } from "../common/Modal/ConfirmDialog";
+import { Loader } from "../common/Loader/Loader";
+
+
 
 export interface Skill {
     id: string | number;
@@ -106,10 +109,10 @@ export const Skills = () => {
                     onClick={handleOpenCreate}
                 />
             </header>
-            <div className={`${styles.container} grid-container`}>
+            <div className={loading ? 'flex-container' : ` ${styles.container} grid-container`}>
                 {
                     loading ? (
-                        <p>Loading...</p> 
+                        <Loader/> 
                     ) : (
                         data.map((skill) => (
                             <SkillCard

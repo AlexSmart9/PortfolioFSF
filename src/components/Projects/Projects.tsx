@@ -6,6 +6,7 @@ import { AdminButton } from "../common/AdminButton/AdminButton";
 import { ProjectsForm, type ProjectsFormData } from "./ProjectsForm";
 import { Modal } from "../common/Modal/Modal";
 import { ConfirmDialog } from "../common/Modal/ConfirmDialog";
+import { Loader } from '../common/Loader/Loader';
 
 export interface Project {
     id: string | number
@@ -115,10 +116,10 @@ export const Projects = () => {
                     onClick={handleOpenCreate}
                 />
             </header>
-            <div className={`${styles.container} grid-container`}>
+            <div className={loading ? 'flex-container' : `${styles.container} grid-container`}>
                     {
                         loading ? (
-                            <p>Loading...</p>
+                            <Loader/>
                         ) : (
                             data.map((project) => (
                                 <ProjectsCard

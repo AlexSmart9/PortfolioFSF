@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './styles/login.css'
+import { Loader } from '../components/common/Loader/Loader';
 
 export const Login = () => {
 
@@ -84,7 +85,7 @@ export const Login = () => {
             
                 <div className="form__buttons-container flex-container">
                 <button className="form__button" type="submit">
-                    {loading ? 'Connecting to Railway...' : 'Get In'}    
+                    {loading ? 'Connecting' : 'Get In'}    
                 </button>
                 </div>
             </form>

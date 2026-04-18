@@ -1,0 +1,22 @@
+.loaderContainer{
+    width: 100%;
+    min-height: 500px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #313030;
+    border-top: 5px solid #00ff15;
+    border-radius:50%;
+    animation: spinner-spin 1s linear infinite;
+}
+
+@keyframes spinner-spin{
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform : rotate(360deg)
+    }
+}

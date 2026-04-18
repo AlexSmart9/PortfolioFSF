@@ -6,6 +6,8 @@ import { Modal } from '../common/Modal/Modal';
 import { CertificationsForm, type CertificationFormData } from './CertificactionsForm';
 import { CertificationsCard } from './CertificationsCard';
 import { ConfirmDialog } from '../common/Modal/ConfirmDialog';
+import { Loader } from '../common/Loader/Loader';
+
 
 
 export interface Certification {
@@ -126,10 +128,10 @@ export const Certifications = () => {
                     onClick={handleOpenCreate}
                 />
             </header>
-            <div className={`${styles.container} grid-container`}>
+            <div className={loading ? 'flex-container' : `${styles.container} grid-container`}>
                 {
                     loading ? (
-                        <p>Loading...</p>
+                        <Loader/>
                     ) : (
                         data.map((certification) => (
                             <CertificationsCard

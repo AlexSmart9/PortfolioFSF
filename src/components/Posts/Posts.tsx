@@ -6,6 +6,7 @@ import { Modal } from "../common/Modal/Modal";
 import { PostsForm, type PostsFormData } from "./PostsForm";
 import { PostsCard } from "./PostsCard";
 import { ConfirmDialog } from "../common/Modal/ConfirmDialog";
+import { Loader } from "../common/Loader/Loader";
 
 // Define the structure of a post.
 
@@ -129,7 +130,7 @@ export const Posts = () => {
             <div className={`${style.container} flex-container`}>
                 {
                     loading ? (
-                        <p>Loading...</p>
+                        <Loader/>
                     ) : (
                         data.map((post) => (
                             <PostsCard
