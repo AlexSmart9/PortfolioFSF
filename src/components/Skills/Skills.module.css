@@ -22,3 +22,12 @@
     gap: 30px;
     align-content: start;
 }
+
+@media (max-width: 768px) {
+    .container  {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -21,3 +21,9 @@
     gap: 30px;
     flex-direction: column;
 }
+
+@media (max-width: 768px) {
+    .section {
+        padding: 10px;
+    }
+}

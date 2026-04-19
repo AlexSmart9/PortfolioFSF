@@ -14,9 +14,13 @@ import { ConfirmDialog } from '../common/Modal/ConfirmDialog';
 export const AdminSidebar = () => {
     
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(() => window.innerWidth > 768);
     const navigate = useNavigate();
+
+    const handleLinkClick = () => {
+        setIsOpen(false);
+    };
+
 
     const handleLogout = () => {
             localStorage.removeItem('token');
@@ -35,6 +39,9 @@ export const AdminSidebar = () => {
 
     return (
         <>
+        <button onClick={toggleSidebar} className={styles.mobileMenu}>
+            <BiMenu size={35} />
+        </button>
         <aside className={`${styles.navbarContainer} ${isOpen ? styles.open : styles.closed}`}>
             <div className={`${styles.topSection} flex-container`}>
                 <button onClick={toggleSidebar} className={styles.menuBtn}>
@@ -46,25 +53,25 @@ export const AdminSidebar = () => {
             <nav className={styles.listContainer}>
                 <ul className={styles.list}>
                     <li>
-                        <NavLink to={'/admin/posts'} className={getNavLinkClass}>
+                        <NavLink to={'/admin/posts'} className={getNavLinkClass} onClick={handleLinkClick}>
                             <BiBookContent size={24} />
                             <span style={{ display: isOpen ? "block" : "none" }}>Blog</span>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={'/admin/projects'} className={getNavLinkClass}>
+                        <NavLink to={'/admin/projects'} className={getNavLinkClass} onClick={handleLinkClick}>
                             <BiBriefcase size={24} />
                             <span style={{ display: isOpen ? "block" : "none" }}>Projects</span>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={'/admin/certifications'} className={getNavLinkClass}>
+                        <NavLink to={'/admin/certifications'} className={getNavLinkClass} onClick={handleLinkClick}>
                             <BiCertification size={24} />
                             <span style={{ display: isOpen ? "block" : "none" }}>Certifications</span>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={'/admin/skills'} className={getNavLinkClass}>
+                        <NavLink to={'/admin/skills'} className={getNavLinkClass} onClick={handleLinkClick}>
                             <BiStar size={24} />
                             <span style={{ display: isOpen ? "block" : "none" }}>Skills</span>
                         </NavLink>

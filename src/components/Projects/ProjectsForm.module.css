@@ -60,3 +60,14 @@
     transform: scaleX(1.05);
     border: 1px solid #fff;
 }
+
+@media (max-width: 768px) {
+    .formGroup input[type='file'] {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        padding: 5px 0;
+    }
+}

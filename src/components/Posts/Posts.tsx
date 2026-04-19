@@ -112,6 +112,7 @@ export const Posts = () => {
             try {
                 await destroy(endpoint, deleteId)
                 setData(prev => prev.filter(item => item.id !== deleteId))
+                setDeleteId(null);
             } catch (error) {
                 
             }

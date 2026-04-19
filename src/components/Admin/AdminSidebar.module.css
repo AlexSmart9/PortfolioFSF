@@ -102,4 +102,51 @@
     color: #ff0011;
 }
 
+.mobileMenu {
+    display: none;
+}
 
+@media (max-width: 768px) {
+    .mobileMenu{
+        display: block;
+        position: fixed;
+        top: 15px;
+        z-index: 2000;
+        background: rgba(0,0,0,0.8);
+        color: #00ff15;
+        padding: 15px;
+        cursor: pointer;
+        backdrop-filter: blur(5px);
+        margin-bottom: 30px;
+        transition: all 2s ease;
+    }
+
+    .topSection {
+        margin-top: 40px;
+    }
+
+    .menuBtn{
+        display: none;
+    }
+
+    .navbarContainer {
+        position: fixed;
+        z-index: 1000;
+        height: 100dvh;
+        transition: all 1s ease;
+        
+    }
+
+    .open, .closed {
+        width: 250px;
+    }
+
+    .closed {
+        transform: translateX(-100%);
+    }
+
+    .open {
+        transform: translateX(0);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.8);
+    }
+}

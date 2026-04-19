@@ -70,3 +70,18 @@
 .content::-webkit-scrollbar-thumb:hover {
     background: #777;
 }
+
+
+@media (max-width: 768px) {
+    .overlay {
+        min-width: 0;
+        width: 100vw;
+    }
+
+    .content {
+        width: 95%;
+        padding: 15px;
+        gap: 20px;
+        box-sizing: border-box;
+    }
+}
