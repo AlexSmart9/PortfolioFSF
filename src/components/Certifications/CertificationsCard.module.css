@@ -52,8 +52,8 @@
     color: #ff0000;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .card {
         height: 450px;
     }
-}
+} */
