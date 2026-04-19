@@ -17,7 +17,7 @@ export const AdminButton = ({ tooltipText, onClick }: AdminButtonProps) => {
             title={tooltipText}       
             aria-label={tooltipText}
         >
-            <BiPlus size={20} /> Nuevo
+            <BiPlus size={20} /> New
         </button>
     );
 };
