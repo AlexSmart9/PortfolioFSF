@@ -112,9 +112,9 @@
         position: fixed;
         top: 15px;
         z-index: 2000;
-        background: rgba(0,0,0,0.8);
+        background: transparent;
         color: #00ff15;
-        padding: 15px;
+        padding: 0px;
         cursor: pointer;
         backdrop-filter: blur(5px);
         margin-bottom: 30px;
