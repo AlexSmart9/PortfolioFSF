@@ -145,6 +145,7 @@ export const Posts = () => {
                     )
                 }
             </div>
+            
             <Modal
                 isOpen={modalIsOpen}
                 onClose={handleCloseModal}
