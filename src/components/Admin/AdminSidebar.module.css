@@ -133,7 +133,7 @@
         position: fixed;
         z-index: 1000;
         height: 100dvh;
-        transition: all 1s ease;
+        transition: all 0.5s ease;
         
     }
 

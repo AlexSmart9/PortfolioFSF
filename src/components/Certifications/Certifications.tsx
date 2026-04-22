@@ -122,7 +122,7 @@ export const Certifications = () => {
     return (
         <section className={`${styles.section}`}>
             <header className={`${styles.header} flex-container`}>
-                <h2>Certifications</h2>
+                <h2>Cert.</h2>
                 <AdminButton
                     tooltipText="Add new Certification"
                     onClick={handleOpenCreate}

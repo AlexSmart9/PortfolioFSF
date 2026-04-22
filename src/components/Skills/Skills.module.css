@@ -7,11 +7,16 @@
 .header{
     height: 70px;
     width:100%;
+    position: sticky;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
 }
 
 .subtitle {
     font-size: 34px;
     color: #fff;
+    background-color: transparent;
 }
 
 .container {
@@ -24,10 +29,21 @@
 }
 
 @media (max-width: 768px) {
+    .sectin {
+        padding: 0;
+    }
+
     .container  {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        margin-top: 70px;
+    }
+
+    .header {
+        position: fixed;
+        width: 100dvw; 
+        height: 70px;
     }
 }

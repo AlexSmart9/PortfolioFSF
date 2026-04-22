@@ -20,6 +20,8 @@
 @media (max-width: 768px) {
     .btnAdminCreate{
         top: auto;
+        width: 60px;
+        right: 20px;
     }
 
 }
