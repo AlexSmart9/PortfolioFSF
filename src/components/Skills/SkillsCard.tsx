@@ -19,7 +19,10 @@ const iconColorsMap: Record<string, string> = {
     SiTypescript: '#3178C6',
     SiPhp: '#777BB4',
     SiGit: '#F05032',
-    SiDocker: '#2496ED'
+    SiDocker: '#2496ED',
+    SiMongodb: '#47A248',
+    SiPython: '#3776AB',
+    BiNetworkChart: '#00ff15'
 };
 
 export const SkillCard = ({skill, onEdit, onDelete}: SkillCardProps) => {
