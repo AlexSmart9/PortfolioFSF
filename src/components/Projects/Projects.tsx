@@ -108,13 +108,10 @@ export const Projects = () => {
     }
 
     return (
-        <section className={styles.section}>
-            <header className={`${styles.header} flex-container`}>
-                <h2>Projects</h2>
-                <AdminButton
-                    tooltipText="Add new Project"
-                    onClick={handleOpenCreate}
-                />
+        <>
+            <section className={styles.section}>
+                <header className={`${styles.header} flex-container`}>
+                    <h2>Projects</h2>
             </header>
             <div className={loading ? 'flex-container' : `${styles.container} grid-container`}>
                     {
@@ -152,5 +149,10 @@ export const Projects = () => {
                     confirmText="Delete"
                 />
         </section>
+        <AdminButton
+            tooltipText="Add new Project"
+            onClick={handleOpenCreate}
+        />
+        </>
     );
 };

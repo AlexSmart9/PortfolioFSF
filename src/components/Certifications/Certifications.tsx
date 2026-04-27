@@ -120,14 +120,11 @@ export const Certifications = () => {
     }
 
     return (
-        <section className={`${styles.section}`}>
-            <header className={`${styles.header} flex-container`}>
-                <h2>Cert.</h2>
-                <AdminButton
-                    tooltipText="Add new Certification"
-                    onClick={handleOpenCreate}
-                />
-            </header>
+        <>
+            <section className={`${styles.section}`}>
+                <header className={`${styles.header} flex-container`}>
+                    <h2>Certifications</h2>
+                </header>
             <div className={loading ? 'flex-container' : `${styles.container} grid-container`}>
                 {
                     loading ? (
@@ -164,5 +161,10 @@ export const Certifications = () => {
                 confirmText="Delete"
             />
         </section>
+            <AdminButton
+                tooltipText="Add new Certification"
+                onClick={handleOpenCreate}
+            />
+        </>
     );
 };

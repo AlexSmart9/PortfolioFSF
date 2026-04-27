@@ -101,13 +101,10 @@ export const Skills = () => {
 
     return (
       
-      <section className={`${styles.section}`}>
+     <>
+         <section className={`${styles.section}`}>
             <header className={`${styles.header} flex-container`}>
                 <h2 className={styles.subtitle}>Skills</h2>
-                <AdminButton
-                    tooltipText="Add new Skill"
-                    onClick={handleOpenCreate}
-                />
             </header>
             <div className={loading ? 'flex-container' : ` ${styles.container} grid-container`}>
                 {
@@ -146,6 +143,11 @@ export const Skills = () => {
                 confirmText="Delete"
             />
         </section>
+        <AdminButton
+            tooltipText="Add new Skill"
+            onClick={handleOpenCreate}
+        />
+     </>
         
     )
 }
