@@ -120,14 +120,11 @@ export const Posts = () => {
     }
 
     return (
-        <section className={style.section}>
-            <header className={`${style.header} flex-container`}>
-                <h2>Blog</h2>
-                <AdminButton
-                    tooltipText="Add new Post"
-                    onClick={handleOpenCreate}
-                />
-            </header>
+    <>
+            <section className={style.section}>
+                <header className={`${style.header} flex-container`}>
+                    <h2>Blog</h2>
+                </header>
             <div className={`${style.container} flex-container`}>
                 {
                     loading ? (
@@ -167,6 +164,11 @@ export const Posts = () => {
                 confirmText="Delete"
             />
         </section>
+        <AdminButton
+            tooltipText="Add new Post"
+            onClick={handleOpenCreate}
+        />
+    </>
     )
 
 }
