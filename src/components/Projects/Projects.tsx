@@ -15,6 +15,8 @@ export interface Project {
     image_url?: string
     link:string
     technologies:string
+    repo_url:string
+    status:string
 }
 
 export const Projects = () => {
@@ -76,6 +78,8 @@ export const Projects = () => {
         dataToSend.append('description', formData.description);
         dataToSend.append('link', formData.link);
         dataToSend.append('technologies', formData.technologies);
+        dataToSend.append('repo_url', formData.repo_url); 
+        dataToSend.append('status', formData.status)
 
         if (formData.image) {
             dataToSend.append('image', formData.image);

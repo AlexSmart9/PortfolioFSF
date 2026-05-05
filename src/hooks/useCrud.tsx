@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios, {AxiosError} from 'axios';
 
-//Generic custom hook to handel standart API operations
+//Generic custom hook to handle standart API operations
 export const useCrud = <T,>( baseUrl:string ) => {
 
     //State to store fetched data, loading status and potential errors
@@ -27,11 +27,11 @@ export const useCrud = <T,>( baseUrl:string ) => {
             const axiosError = err as AxiosError<{message?: string}>
             setError(axiosError.response?.data.message || 'Something went wrong');
 
-        } finally {{
+        } finally {
             
             setLoading(false);
             
-            }
+            
         }
 
     }

@@ -9,6 +9,8 @@ export interface ProjectsFormData {
     link: string;
     technologies: string;
     image: File | null;
+    repo_url: string;
+    status: string;
 }
 
 interface ProjectFormProps {
@@ -24,10 +26,12 @@ export const ProjectsForm = ({ onSubmit, onCancel, initialData }: ProjectFormPro
         description: initialData?.description || '',
         link: initialData?.link || '',
         technologies: initialData?.technologies || '',
-        image: null // Siempre null por seguridad
+        image: null,
+        repo_url: initialData?.repo_url || '',
+        status: initialData?.status || ''
     });
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
@@ -46,7 +50,7 @@ export const ProjectsForm = ({ onSubmit, onCancel, initialData }: ProjectFormPro
 
     return (
         <form onSubmit={handleSubmit} className={`${styles.form} flex-container`}>
-            <div className={`${styles.formGroup} flex-container`}>
+            <div className={`${styles.formGroup}`}>
                 <label htmlFor='title'>Title</label>
                 <input 
                     type="text" 
@@ -89,6 +93,31 @@ export const ProjectsForm = ({ onSubmit, onCancel, initialData }: ProjectFormPro
                     placeholder="Write the technologies used in your project" 
                     required 
                 />
+            </div>
+            <div className={`${styles.formGroup} flex-container`}>
+                <label htmlFor='repo_url'>Repo URL</label>
+                <input 
+                    type="text" 
+                    name="repo_url" 
+                    value={formData.repo_url} 
+                    onChange={handleChange} 
+                    placeholder="Write the repo URL of your project" 
+                    />
+            </div>
+            <div className={`${styles.formGroup} flex-container`}>
+                <label htmlFor='status'>Status</label>
+                <select 
+                    id='status'
+                    name="status" 
+                    value={formData.status} 
+                    onChange={handleChange} 
+                    required 
+                >
+                    <option value="" disabled>Select a status...</option>
+                    <option value="Planning">Planning</option>
+                    <option value="In Development">In Development</option>
+                    <option value="Completed">Completed</option>
+                </select>
             </div>
             <div className={`${styles.formGroup} flex-container`}>
                 <label htmlFor="image">+ Add image</label>
