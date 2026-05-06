@@ -13,6 +13,19 @@
     width: 100%;
 }
 
+.formGroup ::-webkit-scrollbar {
+    width: 6px; 
+}
+
+.formGroup ::-webkit-scrollbar-track {
+    background: #181818; 
+}
+
+.formGroup ::-webkit-scrollbar-thumb { 
+    background-color: #00b0bd;
+    border-radius: 5px; 
+}
+
 .formGroup input[type='text'] {
     width: 100%;
     height: 25px;
