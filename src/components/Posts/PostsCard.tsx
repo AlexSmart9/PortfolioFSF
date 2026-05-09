@@ -1,6 +1,7 @@
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { type Post } from "./Posts";
 import styles from "./PostsCard.module.css";
+import { useAuth } from "../../context/AuthContext";
 
 export interface PostsCardProps {
     post: Post;
@@ -9,18 +10,25 @@ export interface PostsCardProps {
 }
 
 export const PostsCard = ({ post, onEdit, onDelete }: PostsCardProps) => {
+
+    const {userRole} = useAuth();
+
     return (
         <div className={styles.card}>
             <header className={`${styles.header} flex-container`}>
                 <h3>{post.title}</h3>
-                <div className={`${styles.actions} flex-container`}>
-                    <button className={styles.editBtn} onClick={onEdit} title="Edit Post">
-                        <BiEdit size={30}/>
-                    </button>
-                    <button className={styles.deleteBtn} onClick={onDelete} title="Delete Post">
-                        <BiTrash size={30}/>
-                    </button>
-                </div>
+                {
+                    userRole === 'admin' && (
+                        <div className={`${styles.actions} flex-container`}>
+                            <button className={styles.editBtn} onClick={onEdit} title="Edit Post">
+                                <BiEdit size={30}/>
+                            </button>
+                            <button className={styles.deleteBtn} onClick={onDelete} title="Delete Post">
+                                <BiTrash size={30}/>
+                            </button>
+                        </div>
+                    )
+                }
             </header>
             <div className={styles.content}>
                 <p>{post.content}</p>

@@ -2,6 +2,7 @@ import * as BiIcons from 'react-icons/bi';
 import * as SiIcons from 'react-icons/si';
 import styles from './SkillsCard.module.css';
 import {type Skill} from './Skills';
+import {useAuth} from '../../context/AuthContext';
 
 interface SkillCardProps {
     skill: Skill;
@@ -26,6 +27,8 @@ const iconColorsMap: Record<string, string> = {
 };
 
 export const SkillCard = ({skill, onEdit, onDelete}: SkillCardProps) => {
+
+    const {userRole} = useAuth();
 
     const renderIcon = (iconName : string) => {
 
@@ -61,22 +64,26 @@ export const SkillCard = ({skill, onEdit, onDelete}: SkillCardProps) => {
                 <h3>{skill.name}</h3>
                 <p>{skill.category}</p>
             </div>
-            <div className={`${styles.actions} flex-container`}>
-                <button 
-                    className={styles.editBtn}
-                    onClick={onEdit}
-                    arial-label={`Update ${skill.name}`}
-                >
-                    <BiIcons.BiEdit size={30} />
-                </button>
-                <button 
-                    onClick={onDelete}
-                    arial-label={`Delete ${skill.name}`}
-                    className={styles.deleteBtn}
-                >
-                    <BiIcons.BiTrash size={30} />
-                </button>
-            </div>
+            {
+                userRole === 'admin' && (
+                    <div className={`${styles.actions} flex-container`}>
+                        <button 
+                            className={styles.editBtn}
+                            onClick={onEdit}
+                            arial-label={`Update ${skill.name}`}
+                        >
+                            <BiIcons.BiEdit size={30} />
+                        </button>
+                        <button 
+                            onClick={onDelete}
+                            arial-label={`Delete ${skill.name}`}
+                            className={styles.deleteBtn}
+                        >
+                            <BiIcons.BiTrash size={30} />
+                        </button>
+                    </div>
+                )
+            }
         </div>
     )
 

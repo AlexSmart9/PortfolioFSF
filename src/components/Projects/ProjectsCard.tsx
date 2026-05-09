@@ -3,6 +3,8 @@ import { type Project } from './Projects';
 import styles from './ProjectsCard.module.css';
 import { useState } from 'react';
 import { SiGithub } from 'react-icons/si';
+import { useAuth } from "../../context/AuthContext";
+
 
 interface ProjectCardProps {
     project: Project;
@@ -11,8 +13,10 @@ interface ProjectCardProps {
 }
 
 export const ProjectsCard = ({ project, onEdit, onDelete }: ProjectCardProps) => {
-    const [isFlipped, setIsFlipped] = useState(false)
+    
+    const {userRole} = useAuth();
 
+    const [isFlipped, setIsFlipped] = useState(false)
     const handleFlip = () => {
         setIsFlipped(!isFlipped)
     }
@@ -47,22 +51,26 @@ export const ProjectsCard = ({ project, onEdit, onDelete }: ProjectCardProps) =>
                         </div> 
                         <p className={styles.flipHint}>Haz clic para ver detalles ↺</p>
                     </div>
-                    <div className={`${styles.actions} flex-container`}>
-                        <button 
-                            className={styles.editBtn}
-                            onClick={(e) => { e.stopPropagation(); onEdit(); }} 
-                            title="Edit Project"
-                        >
-                            <BiEdit size={30}/>
-                        </button>
-                        <button 
-                            className={styles.deleteBtn} 
-                            onClick={(e) => { e.stopPropagation(); onDelete(); }} 
-                            title="Delete Project"
-                        >
-                            <BiTrash size={30}/>
-                        </button>
-                    </div>
+                    {
+                        userRole === 'admin' && (
+                            <div className={`${styles.actions} flex-container`}>
+                                <button 
+                                    className={styles.editBtn}
+                                    onClick={(e) => { e.stopPropagation(); onEdit(); }} 
+                                    title="Edit Project"
+                                >
+                                    <BiEdit size={30}/>
+                                </button>
+                                <button 
+                                    className={styles.deleteBtn} 
+                                    onClick={(e) => { e.stopPropagation(); onDelete(); }} 
+                                    title="Delete Project"
+                                >
+                                    <BiTrash size={30}/>
+                                </button>
+                            </div>
+                        )
+                    }
                 </div>
                 <div className={styles.cardBack}>
                      <p className={styles.description}>

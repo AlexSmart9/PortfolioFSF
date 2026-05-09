@@ -1,5 +1,6 @@
 import * as BiIcons from 'react-icons/bi';
 import { type Certification } from './Certifications';
+import { useAuth } from '../../context/AuthContext';
 import styles from './CertificationsCard.module.css';
 
 export interface CertificationsCardProps {
@@ -10,6 +11,8 @@ export interface CertificationsCardProps {
 
 export const CertificationsCard = ({certification, onEdit, onDelete} : CertificationsCardProps) => {
 
+    const { userRole } = useAuth();
+
     return (
         <div className={`${styles.card} flex-container`}>
             <div className={styles.imageContainer}>
@@ -18,20 +21,24 @@ export const CertificationsCard = ({certification, onEdit, onDelete} : Certifica
             <h3 className={styles.title}>{certification.title}</h3>
             <p className={styles.entity}>{certification.issuing_entity}</p>
             <p className={styles.date}>{certification.date_acquisition}</p>
-            <div className={`${styles.actions} flex-container`}>
-                <button 
-                    onClick={onEdit} 
-                    className={styles.editBtn}
-                    >
-                        <BiIcons.BiEdit size={30} />
-                </button>
-                <button 
-                    onClick={onDelete} 
-                    className={styles.deleteBtn}
-                    >
-                        <BiIcons.BiTrash size={30}/>
-                </button>
-            </div>
+            {
+                userRole === 'admin' && (
+                    <div className={`${styles.actions} flex-container`}>
+                        <button 
+                            onClick={onEdit} 
+                            className={styles.editBtn}
+                        >
+                            <BiIcons.BiEdit size={30} />
+                        </button>
+                        <button 
+                            onClick={onDelete} 
+                            className={styles.deleteBtn}
+                        >
+                            <BiIcons.BiTrash size={30}/>
+                        </button>
+                    </div>
+                )
+            }
         </div>
     )
 }

@@ -2,11 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './styles/login.css'
-import { Loader } from '../components/common/Loader/Loader';
+import { useAuth } from "../context/AuthContext";
 
 export const Login = () => {
 
     const navigate = useNavigate();
+
+    const {login} = useAuth();
 
     // Capture what user writes
     const [email, setEmail] = useState('');
@@ -14,44 +16,53 @@ export const Login = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     
+    const API_BASE_URL = 'https://portfoliofs-production.up.railway.app/api';
 
-    // Function to handle inputs
-    const handleSubmit = async (e:React.SubmitEvent) => {
-        const API_BASE_URL = 'https://portfoliofs-production.up.railway.app/api';
-        e.preventDefault();
+    const executeLogin = async (credentials: any) => {
         setError('');
-
-        if (!email || !password) {
-            
-            setError('Please complete all field 🕵️‍♂️');
-            return;
-
-        }
-        
         setLoading(true);
 
-        try{
-            const response = await axios.post(`${API_BASE_URL}/login`, {
-                email:email,
-                password:password
-            });
-
+        try {
+            
+            const response = await axios.post(`${API_BASE_URL}/login`, credentials);
             const token = response.data.token;
 
-            localStorage.setItem('token', token);
+            login(token);
 
-            navigate('/admin')
+            navigate('/admin');
+
+
         } catch (err:any) {
             console.error('Request Error', err);
 
             if(err.response) {
                 setError(err.response.data.error || 'Invalid credentials');
             } else {
-                setError('Server conncection Error');
+                setError('Server connection Error');
             }
         } finally {
             setLoading(false);
-        };
+        }
+    }
+
+    // Function to login as an admin
+    const handleSubmit = async (e:React.SubmitEvent) => {
+        e.preventDefault();
+
+        if(!email || !password) {
+            setError('Please complete all field 🕵️‍♂️');
+            return;
+        }
+        await executeLogin({email, password});
+    };
+
+    // Function to login as a guest
+    const handleGuestLogin = async () => {
+        
+        await executeLogin({ 
+            email: 'guest@guest.com', 
+            password: 'guest1234' 
+        });
     };
 
     return (
@@ -89,6 +100,17 @@ export const Login = () => {
                 </button>
                 </div>
             </form>
+            <div className="guest__container flex-container">
+                <h2>Are you a recruiter?</h2>
+                <button 
+                    type="button" 
+                    className="guest__button" 
+                    onClick={handleGuestLogin}
+                    disabled={loading}
+                >
+                    {loading ? 'Connecting...' : 'Access as Guest'}
+                </button>
+            </div>           
         </div>
     );
     
