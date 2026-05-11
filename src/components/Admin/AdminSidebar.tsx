@@ -10,9 +10,14 @@ import {
 } from 'react-icons/bi';
 import styles from './AdminSidebar.module.css';
 import { ConfirmDialog } from '../common/Modal/ConfirmDialog';
+import { useAuth } from '../../context/AuthContext';
+
+export const UserSidebar = () => {
+}
 
 export const AdminSidebar = () => {
     
+    const {logout} = useAuth();
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(() => window.innerWidth > 768);
     const navigate = useNavigate();
@@ -23,7 +28,7 @@ export const AdminSidebar = () => {
 
 
     const handleLogout = () => {
-            localStorage.removeItem('token');
+            logout();
             navigate('/login');
     };
 
