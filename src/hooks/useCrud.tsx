@@ -1,15 +1,14 @@
 import { useState } from "react";
-import axios, {AxiosError} from 'axios';
+import {AxiosError} from 'axios';
+import api from '../api/axiosConfig';
 
 //Generic custom hook to handle standart API operations
-export const useCrud = <T,>( baseUrl:string ) => {
+export const useCrud = <T,>( ) => {
 
     //State to store fetched data, loading status and potential errors
     const [data, setData] = useState<T[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const token = localStorage.getItem('token');
-
 
     //Read: Fetch all records from a specific endpoint
     const getAll = async (endpoint: string) => {
@@ -18,7 +17,7 @@ export const useCrud = <T,>( baseUrl:string ) => {
 
         try {
 
-            const response = await axios.get(`${baseUrl}${endpoint}`);
+            const response = await api.get(endpoint);
             setData(response.data);
             return response.data;
 
@@ -30,8 +29,7 @@ export const useCrud = <T,>( baseUrl:string ) => {
         } finally {
             
             setLoading(false);
-            
-            
+                        
         }
 
     }
@@ -43,11 +41,7 @@ export const useCrud = <T,>( baseUrl:string ) => {
         setError(null);
         try {
             
-            const response = await axios.post(`${baseUrl}${endpoint}`, payload, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            } );
+            const response = await api.post(endpoint, payload);
             const newData = response.data;
 
             //Optimiscally update the UI by adding the new data to the existing data
@@ -59,13 +53,6 @@ export const useCrud = <T,>( baseUrl:string ) => {
             
             const axiosError = err as AxiosError<{ message?: string }>;
             setError(axiosError.response?.data?.message || axiosError.message || 'An unexpected error occurred while creating');
-            if (err.response && err.response.status === 401) {
-                alert("Your sesion has expired, please login again.");
-                localStorage.removeItem('token'); 
-                window.location.href = '/login'; 
-            }
-            
-            console.error('Error deleting data', err);
             throw err;
 
         } finally {
@@ -85,11 +72,7 @@ export const useCrud = <T,>( baseUrl:string ) => {
 
             const method = isFormData ? 'post' : 'put';
 
-            const response = await axios[method](`${baseUrl}${endpoint}/${id}`, payload, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            const response = await api[method](`${endpoint}/${id}`, payload);
             
             const updatedData = response.data;
        
@@ -100,13 +83,6 @@ export const useCrud = <T,>( baseUrl:string ) => {
         } catch (err : any) {
             const axiosError = err as AxiosError<{ message?: string }>;
             setError(axiosError.response?.data?.message || axiosError.message || 'An unexpected error occurred while updating');
-            if (err.response && err.response.status === 401) {
-                alert("Your sesion has expired, please login again.");
-                localStorage.removeItem('token'); 
-                window.location.href = '/login'; 
-            }
-            
-            console.error('Error updating data', err);
             throw err;
 
         } finally {
@@ -123,23 +99,14 @@ export const useCrud = <T,>( baseUrl:string ) => {
 
         try {
             
-            await axios.delete(`${baseUrl}${endpoint}/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            await api.delete(`${endpoint}/${id}`);
             setData((prevData) => prevData.filter((item:any) => item.id !== id));
 
         } catch (err: any) { 
             
         
-            if (err.response && err.response.status === 401) {
-                alert("Your sesion has expired, please login again.");
-                localStorage.removeItem('token'); 
-                window.location.href = '/login'; 
-            }
-            
-            console.error('Error deleting data', err);
+            const axiosError = err as AxiosError<{ message?: string }>;
+            setError(axiosError.response?.data?.message || axiosError.message || 'Error deleting');
             throw err;
         } finally {
 
